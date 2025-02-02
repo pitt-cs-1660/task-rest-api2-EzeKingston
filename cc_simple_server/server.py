@@ -88,14 +88,14 @@ async def get_tasks():
     conn.commit() 
         
     conn.close()
+    rows 
+    # tasks=[]
     
-    tasks=[]
+    # for r in rows:
+    #    tasks.append(TaskRead(id=r["id"], title=r["title"], description=r["description"], completed=bool(r["completed"])))
     
-    for r in rows:
-       tasks.append(TaskRead(id=r["id"], title=r["title"], description=r["description"], completed=bool(r["completed"])))
-    
-    return tasks
-    #return [TaskRead(id=r["id"], title=r["title"], description=r["description"], completed=bool(r["completed"])) for r in rows]
+    # return tasks
+    return [TaskRead(id=r["id"], title=r["title"], description=r["description"], completed=bool(r["completed"])) for r in rows]
     
 
 # UPDATE ROUTE data is sent in the body of the request and the task_id is in the URL
@@ -135,7 +135,7 @@ async def update_task(task_id: int, task_data: TaskCreate):
     )
 
     return update_instance
-    #return TaskRead(id=3, title="finished extra credit", description="expensive watch time trial", completed="true")
+    #return TaskRead(id=3, title="finished extra credit", description="expensive watch time trial", completed="true") you can brute force the code and it still creates a instancce of the class TaskRead pydantic 
     #you don't want line 98. It will raise an error everytime 
     #raise HTTPException(status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="Not implemented")
 

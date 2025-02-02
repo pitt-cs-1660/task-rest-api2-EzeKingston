@@ -51,15 +51,24 @@ async def create_task(task_data: TaskCreate):
     (task_data.title, task_data.description, task_data.completed),
     )
     
+    task_id=cursor.lastrowid
+
     conn.commit()   
     conn.close()
    
+    # post_instance = TaskRead(
+    #  id =42,
+    #  title= "Attempt extra credit",
+    #  description="calculate time trial",
+    #  completed="false"
+    # )
     post_instance = TaskRead(
-    id =42,
-     title= "Attempt extra credit",
-     description="calculate time trial",
-     completed="false"
+     id =task_id,
+     title= task_data.title,
+     description=task_data.description,
+     completed=task_data.completed
     )
+    
 
 
     return post_instance
@@ -85,17 +94,19 @@ async def get_tasks():
     "SELECT * FROM tasks"
     )
     rows = cursor.fetchall()
+
+    task_id=cursor.lastrowid
     conn.commit() 
         
     conn.close()
-    rows 
+    rows
     # tasks=[]
     
     # for r in rows:
     #    tasks.append(TaskRead(id=r["id"], title=r["title"], description=r["description"], completed=bool(r["completed"])))
     
     # return tasks
-    return [TaskRead(id=r["id"], title=r["title"], description=r["description"], completed=bool(r["completed"])) for r in rows]
+    return [TaskRead(id=r[task_id], title=r["title"], description=r["description"], completed=bool(r["completed"])) for r in rows]
     
 
 # UPDATE ROUTE data is sent in the body of the request and the task_id is in the URL
@@ -128,11 +139,17 @@ async def update_task(task_id: int, task_data: TaskCreate):
     conn.commit()   
     conn.close()
 
-    update_instance = TaskRead(id=3,
-     title= "finished extra credit",
-     description="expensive watch time trial",
-     completed="true"
-    )
+    # update_instance = TaskRead(id=3,
+    #  title= "finished extra credit",
+    #  description="expensive watch time trial",
+    #  completed="true"
+    # )
+
+    update_instance = TaskRead(id=task_id,
+     title= task_data.title,
+     description=task_data.description,
+     completed=task_data.completed
+     )
 
     return update_instance
     #return TaskRead(id=3, title="finished extra credit", description="expensive watch time trial", completed="true") you can brute force the code and it still creates a instancce of the class TaskRead pydantic 

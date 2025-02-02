@@ -135,7 +135,7 @@ async def update_task(task_id: int, task_data: TaskCreate):
     (task_data.title, task_data.description, task_data.completed, task_id),
     )
 
-    # task_id=cursor.lastrowid 
+    task_id=cursor.lastrowid 
     conn.commit()   
     conn.close()
 
@@ -177,7 +177,7 @@ async def delete_task(task_id: int):
     "DELETE FROM tasks WHERE id=?", (task_id,)
     )
 
-    task_id.cursor.lastrowid
+    
     conn.commit()   
     
     conn.close()

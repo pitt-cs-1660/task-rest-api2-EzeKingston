@@ -39,26 +39,22 @@ async def create_task(task_data: TaskCreate):
         TaskRead: The created task data
     """
     #Task creation 
-    { "id": 42,
-     "title": "Attempt extra credit",
-     "description":"calculate time trial",
-     "completed":"false"}
-    #Args for task 
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(
     "INSERT INTO tasks (title, description, completed) VALUES (?, ?, ?)",
     (task_data.title, task_data.description, task_data.completed),
     )
-    
+
+    task_id = cursor.lastrowid
     conn.commit()   
     conn.close()
    
     post_instance = TaskRead(
-    id =42,
-     title= "Attempt extra credit",
-     description="calculate time trial",
-     completed="false"
+        id =task_id,
+        title= task_data.title,
+        description=task_data.description,
+        completed=task_data.completed
     )
 
 
@@ -88,7 +84,6 @@ async def get_tasks():
     conn.commit() 
         
     conn.close()
-    rows 
     # tasks=[]
     
     # for r in rows:

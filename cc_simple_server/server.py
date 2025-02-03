@@ -177,7 +177,7 @@ async def delete_task(task_id: int):
     "DELETE FROM tasks WHERE id=?", (task_id,)
     )
 
-    
+    task_id=5
     conn.commit()   
     
     conn.close()

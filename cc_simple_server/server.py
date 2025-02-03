@@ -176,14 +176,14 @@ async def delete_task(task_id: int):
     cursor.execute(
     "DELETE FROM tasks WHERE id=?", (task_id,)
     )
-    task_id=cursor.lastrowid
+   
     
     conn.commit()   
     
     conn.close()
 
     
-    return {"messege":f"Task {task_id} deleted successfully"}
+    return {"message":f"Task {task_id} deleted successfully"}
     #raise HTTPException(status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="Not implemented")
 
     

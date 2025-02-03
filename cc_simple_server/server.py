@@ -170,7 +170,7 @@ async def delete_task(task_id: int):
     Returns:
         dict: A message indicating that the task was deleted successfully
     """
-    task_id=5
+    task_id:5
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(
